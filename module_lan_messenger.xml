@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="module_lan_messenger" default="compile.module.lan_messenger">
+  <dirname property="module.lan_messenger.basedir" file="${ant.file.module_lan_messenger}"/>
+  
+  <property name="module.jdk.home.lan_messenger" value="${project.jdk.home}"/>
+  <property name="module.jdk.bin.lan_messenger" value="${project.jdk.bin}"/>
+  <property name="module.jdk.classpath.lan_messenger" value="${project.jdk.classpath}"/>
+  
+  <property name="compiler.args.lan_messenger" value="-encoding windows-1252 -source 8 ${compiler.args}"/>
+  
+  <property name="lan_messenger.output.dir" value="${module.lan_messenger.basedir}/out/production/LAN_Messenger"/>
+  <property name="lan_messenger.testoutput.dir" value="${module.lan_messenger.basedir}/out/test/LAN_Messenger"/>
+  
+  <path id="lan_messenger.module.bootclasspath">
+    <!-- Paths to be included in compilation bootclasspath -->
+  </path>
+  
+  <path id="lan_messenger.module.production.classpath">
+    <path refid="${module.jdk.classpath.lan_messenger}"/>
+    <pathelement location="${basedir}/lib/kryonet-2.21-all.jar"/>
+  </path>
+  
+  <path id="lan_messenger.runtime.production.module.classpath">
+    <pathelement location="${lan_messenger.output.dir}"/>
+    <pathelement location="${basedir}/lib/kryonet-2.21-all.jar"/>
+  </path>
+  
+  <path id="lan_messenger.module.classpath">
+    <path refid="${module.jdk.classpath.lan_messenger}"/>
+    <pathelement location="${lan_messenger.output.dir}"/>
+    <pathelement location="${basedir}/lib/kryonet-2.21-all.jar"/>
+  </path>
+  
+  <path id="lan_messenger.runtime.module.classpath">
+    <pathelement location="${lan_messenger.testoutput.dir}"/>
+    <pathelement location="${lan_messenger.output.dir}"/>
+    <pathelement location="${basedir}/lib/kryonet-2.21-all.jar"/>
+  </path>
+  
+  
+  <patternset id="excluded.from.module.lan_messenger">
+    <patternset refid="ignored.files"/>
+  </patternset>
+  
+  <patternset id="excluded.from.compilation.lan_messenger">
+    <patternset refid="excluded.from.module.lan_messenger"/>
+  </patternset>
+  
+  <path id="lan_messenger.module.sourcepath">
+    <dirset dir="${module.lan_messenger.basedir}">
+      <include name="src"/>
+    </dirset>
+  </path>
+  
+  
+  <target name="compile.module.lan_messenger" depends="compile.module.lan_messenger.production,compile.module.lan_messenger.tests" description="Compile module LAN_Messenger"/>
+  
+  <target name="compile.module.lan_messenger.production" depends="register.custom.compilers" description="Compile module LAN_Messenger; production classes">
+    <mkdir dir="${lan_messenger.output.dir}"/>
+    <javac2 destdir="${lan_messenger.output.dir}" debug="${compiler.debug}" nowarn="${compiler.generate.no.warnings}" memorymaximumsize="${compiler.max.memory}" fork="true" executable="${module.jdk.bin.lan_messenger}/javac">
+      <compilerarg line="${compiler.args.lan_messenger}"/>
+      <bootclasspath refid="lan_messenger.module.bootclasspath"/>
+      <classpath refid="lan_messenger.module.production.classpath"/>
+      <src refid="lan_messenger.module.sourcepath"/>
+      <patternset refid="excluded.from.compilation.lan_messenger"/>
+    </javac2>
+    
+    <copy todir="${lan_messenger.output.dir}">
+      <fileset dir="${module.lan_messenger.basedir}/src">
+        <patternset refid="compiler.resources"/>
+        <type type="file"/>
+      </fileset>
+    </copy>
+  </target>
+  
+  <target name="compile.module.lan_messenger.tests" depends="register.custom.compilers,compile.module.lan_messenger.production" description="compile module LAN_Messenger; test classes" unless="skip.tests"/>
+  
+  <target name="clean.module.lan_messenger" description="cleanup module">
+    <delete dir="${lan_messenger.output.dir}"/>
+    <delete dir="${lan_messenger.testoutput.dir}"/>
+  </target>
+</project>

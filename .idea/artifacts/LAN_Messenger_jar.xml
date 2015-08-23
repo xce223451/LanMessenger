@@ -1,0 +1,11 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="LAN_Messenger:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/LAN_Messenger_jar</output-path>
+    <root id="archive" name="LAN_Messenger.jar">
+      <element id="module-output" name="LAN_Messenger" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/lib/kryonet-2.21-all.jar" path-in-jar="/" />
+      <element id="file-copy" path="$PROJECT_DIR$/lib/kryonet-2.21-all.jar" />
+      <element id="dir-copy" path="$PROJECT_DIR$/res" />
+    </root>
+  </artifact>
+</component>
