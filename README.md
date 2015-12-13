@@ -1,6 +1,6 @@
 # LAN Messenger
 
-Space Shooty is a remake of the classic Asteroids game. Space Shooty was created using the following:
+An application that allows user to transmit text messages to anyone connect to the server via a local area network. LAN Messenger was created using the following:
 
   - Programming Langauge: Java
   - Frameworks: JavaFX & Kryonet
